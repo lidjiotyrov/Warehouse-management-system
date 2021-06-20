@@ -1,0 +1,13 @@
+.production {
+
+  &__product {
+    display: flex;
+    align-items: center;
+    padding: 5px;
+    cursor: pointer;
+  }
+}
+
+.backgroundColor {
+  background-color: #f1f1f1;
+}
