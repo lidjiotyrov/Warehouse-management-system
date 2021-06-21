@@ -1,6 +1,6 @@
 .navbar {
   width: 25%;
-  border-right: 1px solid #f1f1f1;
+  border-right: 1px solid #e4ecef;
 
   &__container {
 
@@ -12,13 +12,14 @@
     &__content {
       display: flex;
       flex-direction: column;
-      background-color: #f1f1f1;
+      border-radius: 10px;
+      margin: 5px;
+      background-color: #ffffff;
 
       &__item {
         text-align: center;
         cursor: pointer;
-        margin-bottom: 20px;
-        padding: 5px;
+        padding: 10px;
 
       }
     }

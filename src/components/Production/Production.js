@@ -8,26 +8,34 @@ import './Production.scss'
 
 
 const Production = () => {
-    const production = useSelector(productionSelector)
-    const dispatch = useDispatch()
+  const production = useSelector(productionSelector)
+  const dispatch = useDispatch()
 
-    const onShowProductionModal = (product) => {
-        dispatch(showProductionModal(product))
-    }
+  const onShowProductionModal = (product) => {
+    dispatch(showProductionModal(product))
+  }
 
-    return (
-        <div className='production'>
-            {production.map((product, index) =>
-                <div
-                    className={`production__product ${index%2 === 0 && 'backgroundColor'}`}
-                    key={product.id}
-                    onClick={() => onShowProductionModal(product)}
-                >
-                    {product.item} {product.amount}
-                </div>
-            )}
+  return (
+    <div className='production'>
+      {production.map((product, index) =>
+        <div
+          className={`production__product ${index % 2 === 0 && 'backgroundColor'}`}
+          key={product.id}
+          onClick={() => onShowProductionModal(product)}
+        >
+          <span>
+            {product.item}
+          </span>
+          <span>
+            {product.amount}
+          </span>
+          <span>
+            {product.amount}
+          </span>
         </div>
-    )
+      )}
+    </div>
+  )
 }
 
 export default Production

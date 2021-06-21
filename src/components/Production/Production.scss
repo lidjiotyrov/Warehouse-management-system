@@ -5,9 +5,13 @@
     align-items: center;
     padding: 5px;
     cursor: pointer;
+
+    span {
+      width: 25%;
+    }
   }
 }
 
 .backgroundColor {
-  background-color: #f1f1f1;
+  background-color: #c2cadc;
 }
