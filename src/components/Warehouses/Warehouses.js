@@ -1,4 +1,4 @@
-import React from 'react'
+import React from "react"
 import {useSelector} from "react-redux";
 
 import {warehousesSelector} from "../../selectors";
@@ -12,7 +12,7 @@ const Warehouses = () => {
         <div className='warehouses'>
             {warehouses.map((warehouse, index) =>
                 <div
-                    className={`warehouses__warehouse ${index%2 == 0 && 'backgroundColor'}` }
+                    className={`warehouses__warehouse ${index%2 === 0 && 'backgroundColor'}` }
                     key={warehouse.id}
                 >
                     {warehouse.item}

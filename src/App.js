@@ -5,8 +5,10 @@ import Warehouses from "./components/Warehouses/Warehouses";
 import Production from "./components/Production/Production";
 import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
+import RootModal from "./components/common/Modal";
 
 import './App.scss'
+
 
 
 
@@ -23,8 +25,8 @@ const App = () => {
                         <Route path='/production' render={() => <Production/>}/>
                     </div>
                 </div>
-
             </div>
+            <RootModal/>
         </BrowserRouter>
 
     );
