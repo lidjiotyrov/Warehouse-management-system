@@ -1,8 +1,10 @@
 import React, { useState } from 'react'
 import { useHistory } from 'react-router-dom';
-import {ReactComponent as CloseIcon} from '../../static/images/icons/closeIcon.svg'
+
+import AddWindow from "./Add-window/Add-window";
 
 import './Navbar.scss'
+
 
 const items = [
   { name: 'Складские помещения', value: 'warehouses' },
@@ -16,7 +18,7 @@ const Navbar = () => {
 
   const openPage = (page) => history.push(`/${page}`)
 
-  const onOpenAddWin = () => {
+  const toggleAddWin = () => {
     setIsHiddenAddWin(!isHiddenAddWin)
   }
 
@@ -34,24 +36,17 @@ const Navbar = () => {
           </div>
         )}
         <div className='navbar__container__content'>
-          <div className='navbar__container__content__item' onClick={onOpenAddWin}>
+          <div className='navbar__container__content__item' onClick={toggleAddWin}>
             Добавить товар
           </div>
         </div>
-      </div>
-      {isHiddenAddWin &&
-      <div className='navbar__add-window'>
-        <div className='navbar__add-window__container'>
-          <div className='navbar__add-window__container__form'>
-            <div>Название:</div>
-            <input type="text"/>
-          </div>
-          <div className='navbar__add-window__container__close-icon'>
-            <CloseIcon onClick={onOpenAddWin}/>
+        <div className='navbar__container__content'>
+          <div className='navbar__container__content__item' onClick={toggleAddWin}>
+            Добавить склад
           </div>
         </div>
       </div>
-      }
+      {isHiddenAddWin && <AddWindow onClose={toggleAddWin}/>}
     </div>
   )
 }

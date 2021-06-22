@@ -10,7 +10,7 @@ export const EDITING_PRODUCT = 'EDITING_PRODUCT'
 
 //Redux warehouses reducer
 
-
+export const ADD_PRODUCT_IN_WAREHOUSE = 'ADD_PRODUCT_IN_WAREHOUSE'
 
 //Modal types
 export const MODALS_TYPES = {

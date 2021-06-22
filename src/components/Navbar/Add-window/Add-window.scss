@@ -1,0 +1,66 @@
+.add-window {
+  display: flex;
+  position: absolute;
+  background-color: white;
+  max-width: 250px;
+  width: 100%;
+  max-height: 150px;
+  height: 100%;
+  border-radius: 15px;
+  box-shadow: 1px 4px 12px 1px #bfb9b9;
+  left: 20%;
+  bottom: 10%;
+
+  &__container {
+    display: flex;
+    width: 100%;
+    margin: 10px;
+
+    &__form {
+      width: 100%;
+
+      &__input {
+        width: 80%;
+        background-color: #c4cee650;
+        border-radius: 10px;
+        border: none;
+        outline: none;
+        padding-left: 10px;
+      }
+
+      &__warehouse {
+        display: flex;
+
+        select {
+          border: none;
+          outline: none;
+          background-color: #c4cee650;
+          border-radius: 10px;
+        }
+
+        &__input {
+          appearance: unset;
+          width: 40px;
+          padding-left: 5px;
+          border: none;
+          outline: none;
+          border-radius: 10px;
+          background-color: #c4cee650
+        }
+      }
+
+      &__add-btn {
+        display: flex;
+        justify-content: flex-end;
+
+        span {
+          cursor: pointer;
+          background-color: rgba(3, 50, 148, 0.5);
+          margin: 5px;
+          padding: 0 5px;
+          border-radius: 10px;
+        }
+      }
+    }
+  }
+}

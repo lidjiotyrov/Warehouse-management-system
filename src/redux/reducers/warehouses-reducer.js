@@ -1,3 +1,4 @@
+import {ADD_PRODUCT_IN_WAREHOUSE} from "../../constans/constans";
 
 const initState = {
     warehouses: [
@@ -8,9 +9,9 @@ const initState = {
             type: 'Средний',
             status: 'Не заполнен',
             production: [
-                {id:1, item: 'Картошка', amount: 22},
-                {id:2, item: 'Хлеб', amount: 23},
-                {id:3, item: 'Молоко', amount: 32},
+                {id: 1, item: 'Картошка', amount: 22},
+                {id: 2, item: 'Хлеб', amount: 23},
+                {id: 3, item: 'Молоко', amount: 32},
             ],
         },
         {
@@ -20,10 +21,10 @@ const initState = {
             type: 'Средний',
             status: 'Не заполнен',
             production: [
-                {id:1, item: 'Картошка', amount: 22},
-                {id:2, item: 'Хлеб', amount: 23},
-                {id:3, item: 'Молоко', amount: 32},
-                {id:4, item: 'Рыба', amount: 14},
+                {id: 1, item: 'Картошка', amount: 22},
+                {id: 2, item: 'Хлеб', amount: 23},
+                {id: 3, item: 'Молоко', amount: 32},
+                {id: 4, item: 'Рыба', amount: 14},
             ],
         },
         {
@@ -33,10 +34,10 @@ const initState = {
             type: 'Крупный',
             status: 'Заполнен',
             production: [
-                {id:1, item: 'Картошка', amount: 22},
-                {id:2, item: 'Хлеб', amount: 23},
-                {id:3, item: 'Молоко', amount: 32},
-                {id:4, item: 'Рыба', amount: 14},
+                {id: 1, item: 'Картошка', amount: 22},
+                {id: 2, item: 'Хлеб', amount: 23},
+                {id: 3, item: 'Молоко', amount: 32},
+                {id: 4, item: 'Рыба', amount: 14},
             ],
         }
     ]
@@ -44,6 +45,10 @@ const initState = {
 
 const warehousesReducer = (state=initState, action) => {
     switch (action.type) {
+        case ADD_PRODUCT_IN_WAREHOUSE:
+            return {
+                ...state,
+            }
         default:
             return state
     }
