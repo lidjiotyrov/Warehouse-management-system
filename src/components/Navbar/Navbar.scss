@@ -6,7 +6,8 @@
 
     &__title {
       text-align: center;
-      margin-bottom: 50px;
+      padding: 10px;
+      border-bottom: 1px solid #e4ecef;
     }
 
     &__content {
@@ -21,6 +22,47 @@
         cursor: pointer;
         padding: 10px;
 
+      }
+    }
+  }
+
+  &__add-window {
+    display: flex;
+    position: absolute;
+    background-color: white;
+    max-width: 250px;
+    width: 100%;
+    max-height: 150px;
+    height: 100%;
+    border-radius: 15px;
+    box-shadow: 1px 4px 12px 1px #bfb9b9;
+    left: 20%;
+    bottom: 10%;
+
+    &__container {
+      display: flex;
+      width: 100%;
+      margin: 10px;
+
+      &__form {
+        width: 100%;
+
+        input {
+          width: 80%;
+          background-color: #c4cee650;
+          border-radius: 10px;
+          border: none;
+          outline: none;
+          padding-left: 10px;
+        }
+      }
+
+      &__close-icon {
+
+        svg {
+          border: 1px solid rgb(3, 50, 148);
+          border-radius: 30px;
+        }
       }
     }
   }

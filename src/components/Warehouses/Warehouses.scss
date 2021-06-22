@@ -1,10 +1,29 @@
 .warehouses {
 
+  &__columns {
+    display: flex;
+    padding: 10px;
+    border-bottom: 1px solid #e4ecef;
+
+    &__column {
+      text-align: center;
+      width: 25%;
+    }
+  }
+
   &__warehouse {
     display: flex;
     align-items: center;
     padding: 5px;
     cursor: pointer;
+
+    span {
+      text-align: center;
+      white-space: nowrap;
+      text-overflow: ellipsis;
+      overflow: hidden;
+      width: 25%;
+    }
   }
 }
 

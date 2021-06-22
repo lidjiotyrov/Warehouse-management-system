@@ -1,5 +1,15 @@
 .production {
 
+  &__columns {
+    display: flex;
+    padding: 10px;
+
+    &__column {
+      text-align: center;
+      width: 25%;
+    }
+  }
+
   &__product {
     display: flex;
     align-items: center;
@@ -7,6 +17,7 @@
     cursor: pointer;
 
     span {
+      text-align: center;
       width: 25%;
     }
   }

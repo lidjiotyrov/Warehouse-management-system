@@ -7,6 +7,13 @@ import {showProductionModal} from "../../redux/actions/common";
 import './Production.scss'
 
 
+const columns = [
+  'Продукт',
+  'На складах',
+  'Не распределенные',
+  'Всего',
+]
+
 const Production = () => {
   const production = useSelector(productionSelector)
   const dispatch = useDispatch()
@@ -17,6 +24,16 @@ const Production = () => {
 
   return (
     <div className='production'>
+      <div className='production__columns'>
+        {columns.map((column, index) =>
+          <div
+            className='production__columns__column'
+            key={index}
+          >
+            {column}
+          </div>
+        )}
+      </div>
       {production.map((product, index) =>
         <div
           className={`production__product ${index % 2 === 0 && 'backgroundColor'}`}
@@ -27,10 +44,13 @@ const Production = () => {
             {product.item}
           </span>
           <span>
-            {product.amount}
+            {product.inWarehouse}
           </span>
           <span>
-            {product.amount}
+            {product.unallocated}
+          </span>
+          <span>
+            {product.inWarehouse + product.unallocated}
           </span>
         </div>
       )}
