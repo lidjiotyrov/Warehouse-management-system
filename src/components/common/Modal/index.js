@@ -5,6 +5,7 @@ import {modalSelector} from "../../../selectors";
 import ProductModal from "../../modals/ProductionModal/ProductionModal";
 import WarehouseModal from "../../modals/WarehousesModal/WarehousesModal";
 import {hideModals} from "../../../redux/actions/common";
+import CloseIconComponent from "../../Shared/closeIconComponent/CloseIconComponent";
 import {MODALS_TYPES} from "../../../constans/constans";
 
 import "./index.scss"
@@ -50,13 +51,11 @@ const RootModal = (props) => {
           <h4 className="modal__header__label">{modalState.modalProps.label}</h4>
           <h2 className="modal__header__title">{modalState.modalProps.title}</h2>
           <div className="modal__close-button">
-            <span onClick={ () => onHideModal()}>
-              x
-            </span>
+            <CloseIconComponent onClose={onHideModal}/>
           </div>
         </div>
         <div className="modal__body">
-          <SpecificModal />
+          <SpecificModal product={modalState.modalProps.product} warehouse={modalState.modalProps.warehouse}/>
         </div>
       </div>
     </div>

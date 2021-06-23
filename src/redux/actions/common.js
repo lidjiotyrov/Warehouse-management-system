@@ -15,8 +15,8 @@ const showModal = (modalType, modalProps) => {
   }
 }
 
-export const showProductionModal = (production) => {
-  return showModal(MODALS_TYPES.VIEW_PRODUCT, {label: 'Justice', title: 'Production', production})
+export const showProductionModal = (product) => {
+  return showModal(MODALS_TYPES.VIEW_PRODUCT, {label: 'Justice', title: 'Production', product})
 }
 
 export const showWarehouseModal = (warehouse) => {

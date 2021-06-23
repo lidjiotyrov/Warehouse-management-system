@@ -6,7 +6,7 @@ export const HIDE_MODAL = 'HIDE_MODAL'
 
 export const ADD_PRODUCT = 'ADD_PRODUCT'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
-export const EDITING_PRODUCT = 'EDITING_PRODUCT'
+export const EDIT_PRODUCT = 'EDIT_PRODUCT'
 
 //Redux warehouses reducer
 

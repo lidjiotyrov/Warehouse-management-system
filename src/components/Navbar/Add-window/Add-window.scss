@@ -4,7 +4,7 @@
   background-color: white;
   max-width: 250px;
   width: 100%;
-  max-height: 150px;
+  max-height: 200px;
   height: 100%;
   border-radius: 15px;
   box-shadow: 1px 4px 12px 1px #bfb9b9;
@@ -29,9 +29,9 @@
       }
 
       &__warehouse {
-        display: flex;
 
         select {
+          margin-bottom: 6px;
           border: none;
           outline: none;
           background-color: #c4cee650;

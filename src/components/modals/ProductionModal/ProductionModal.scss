@@ -5,6 +5,7 @@
   -ms-overflow-style: none;
 
   &__form-area {
+    display: flex;
     margin-top: 1.1rem;
 
     &__form {
@@ -12,11 +13,14 @@
       display: flex;
       flex-direction: column;
       align-items: flex-start;
-      justify-content: center;
 
       &__area-label {
         font-size: 1.1rem;
         line-height: 1.5rem;
+      }
+
+      &__title {
+        display: flex;
       }
     }
 
@@ -28,6 +32,18 @@
       font-family: font_secondary, sans-serif;
       font-size: 1rem;
       color: var(--c-text);
+    }
+  }
+
+  &__btn {
+    display: flex;
+    justify-content: flex-end;
+    margin-top: 10px;
+
+    span {
+      background-color: #c2cadc;
+      padding: 5px;
+      border-radius: 20px;
     }
   }
 }

@@ -3,7 +3,6 @@ import {BrowserRouter, Route} from 'react-router-dom';
 
 import Warehouses from "./components/Warehouses/Warehouses";
 import Production from "./components/Production/Production";
-import Header from "./components/Header/Header";
 import Navbar from "./components/Navbar/Navbar";
 import RootModal from "./components/common/Modal";
 import UnallocatedProducts from "./components/Unallocated-products/Unallocated-products";

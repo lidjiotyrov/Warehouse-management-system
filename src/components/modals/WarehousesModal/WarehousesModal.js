@@ -1,14 +1,12 @@
 import React from "react";
 import {
   Form,
-  FormControl,
-  FormLabel,
 } from "react-bootstrap";
-import { useDispatch, useSelector } from "react-redux";
+import { useDispatch } from "react-redux";
 
 
 
-const WarehouseModal = () => {
+const WarehouseModal = ({warehouse}) => {
   const dispatch = useDispatch()
 
   return (
@@ -22,6 +20,13 @@ const WarehouseModal = () => {
             Information
           </h4>
           <div className="warehouses-modal__row">
+            {warehouse.item}
+            {warehouse.production.map(product =>
+              <div>
+                <div>Наименование {product.item}</div>
+                <div>Количество {product.amount}</div>
+              </div>
+            )}
           </div>
         </Form>
       </div>

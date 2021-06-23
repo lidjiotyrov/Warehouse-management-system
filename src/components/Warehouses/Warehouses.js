@@ -1,9 +1,10 @@
 import React from "react"
-import {useSelector} from "react-redux";
+import {useDispatch, useSelector} from "react-redux";
 
 import {warehousesSelector} from "../../selectors";
 
 import './Warehouses.scss'
+import {showWarehouseModal} from "../../redux/actions/common";
 
 const columns = [
   'Склад',
@@ -14,6 +15,11 @@ const columns = [
 
 const Warehouses = () => {
     const warehouses = useSelector(warehousesSelector)
+  const dispatch = useDispatch()
+
+  const onShowWarehouseModal = (warehouse) => {
+      dispatch(showWarehouseModal(warehouse))
+  }
 
     return (
         <div className='warehouses'>
@@ -32,6 +38,7 @@ const Warehouses = () => {
                 <div
                     className={`warehouses__warehouse ${index%2 === 0 && 'backgroundColor'}` }
                     key={warehouse.id}
+                    onClick={() => onShowWarehouseModal(warehouse)}
                 >
                   <span>
                     {warehouse.item}

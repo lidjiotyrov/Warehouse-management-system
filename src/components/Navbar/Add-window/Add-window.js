@@ -1,12 +1,13 @@
-import React, {useState} from "react";
+import React, {useEffect, useState} from "react";
 import {useDispatch, useSelector} from "react-redux";
 
 import {warehousesSelector} from "../../../selectors";
-import {ReactComponent as CloseIcon} from "../../../static/images/icons/closeIcon.svg";
+import CloseIconComponent from "../../Shared/closeIconComponent/CloseIconComponent";
+import {addProduct} from "../../../redux/actions/actions-production";
 
 import './Add-window.scss'
-import CloseIconComponent from "../../Shared/closeIconComponent/CloseIconComponent";
-import {addProduct} from "../../../redux/actions/actionsProduction";
+import AddIconComponent from "../../Shared/addIconComponent/AddIconComponent";
+import {addProductInWarehouse} from "../../../redux/actions/actions-warehouses";
 
 
 const AddWindow = ({onClose}) => {
@@ -15,12 +16,23 @@ const AddWindow = ({onClose}) => {
     inWarehouse: 0,
     unallocated: 0,
   })
+  console.log('@@@ product ->', product)
 
-  const [forWarehouse, setForWarehouse] = useState({
-    warehouseName: '',
-    product: '',
-    amount: 0
-  })
+  const [forWarehouse, setForWarehouse] = useState([
+    {
+      id: 0,
+      warehouseName: '',
+      product: product.item,
+      amount: 0
+    }
+  ])
+  useEffect(() => {
+    setForWarehouse(forWarehouse.map(form => (
+      {...form, product: product.item})
+    ))
+
+  }, [product.item])
+  console.log('@@@ forWarehouse ->', forWarehouse)
 
   const warehouses = useSelector(warehousesSelector)
   const dispatch = useDispatch()
@@ -36,20 +48,29 @@ const AddWindow = ({onClose}) => {
     setProduct({...product, unallocated: value})
   }
 
-  const handleChangeSelectValue = (e) => {
+  const handleChangeForWarehouseValue = (e, id, key) => {
     const value = e.target.value
-    setForWarehouse({...forWarehouse, warehouseName: value})
+    setForWarehouse(forWarehouse.map(form =>
+      form.id === id ? {...form, [key]: value} : form
+    ))
   }
 
-  const handleChangeAmountForWarehouseValue = (e) => {
-    const value = Number(e.target.value)
-
-    setForWarehouse({...forWarehouse, amount: value})
-    setProduct({...product, inWarehouse: value, unallocated: product.unallocated - value})
+  const onAddInputForWarehouse = () => {
+    setForWarehouse([
+      ...forWarehouse,
+      {
+        id: forWarehouse.length,
+        warehouseName: '',
+        product: product.item,
+        amount: 0
+      }
+    ])
   }
+
 
   const onAddProduct = () => {
     dispatch(addProduct(product))
+    dispatch(addProductInWarehouse(forWarehouse))
   }
 
   return (
@@ -70,25 +91,30 @@ const AddWindow = ({onClose}) => {
             min='0'
           />
           <h6>На склад:</h6>
+          <AddIconComponent onAdd={onAddInputForWarehouse}/>
           <div className='add-window__container__form__warehouse'>
-            <select onChange={(e) => handleChangeSelectValue(e)}>
-              <option value=''>Выбрать склад</option>
-              {warehouses.map(warehouse =>
-                <option
-                  key={warehouse.id}
-                  value={warehouse.item}
-                >
-                  {warehouse.item}
-                </option>
-              )}
-            </select>
-            <input
-              className='add-window__container__form__warehouse__input'
-              type="number"
-              min='0'
-              max={product.unallocated}
-              onChange={(e) => handleChangeAmountForWarehouseValue(e)}
-            />
+            {forWarehouse.map(form =>
+              <div key={form.id}>
+                <select onChange={(e) => handleChangeForWarehouseValue(e, form.id, 'warehouseName')}>
+                  <option value=''>Выбрать склад</option>
+                  {warehouses.map(warehouse =>
+                    <option
+                      key={warehouse.id}
+                      value={warehouse.item}
+                    >
+                      {warehouse.item}
+                    </option>
+                  )}
+                </select>
+                <input
+                  className='add-window__container__form__warehouse__input'
+                  type="number"
+                  min='0'
+                  max={product.unallocated}
+                  onChange={(e) => handleChangeForWarehouseValue(e, form.id, 'amount')}
+                />
+              </div>
+            )}
           </div>
           <div className='add-window__container__form__add-btn'>
             <span onClick={() => onAddProduct()}>

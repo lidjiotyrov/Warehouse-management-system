@@ -1,4 +1,4 @@
-import {ADD_PRODUCT} from "../../constans/constans";
+import {ADD_PRODUCT, EDIT_PRODUCT} from "../../constans/constans";
 
 const initState = {
   production: [
@@ -20,6 +20,11 @@ const productionReducer = (state = initState, action) => {
           inWarehouse: action.payload.inWarehouse,
           unallocated: action.payload.unallocated
         }]
+      }
+
+    case EDIT_PRODUCT:
+      return {
+        ...state, production: state.production.map(product => product)
       }
 
     default:
