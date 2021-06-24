@@ -1,38 +1,30 @@
-import React, {useEffect, useState} from "react";
-import {useDispatch, useSelector} from "react-redux";
+import React, { useEffect, useState } from "react";
+import { useDispatch, useSelector } from "react-redux";
 
-import {warehousesSelector} from "../../../selectors";
+import { warehousesSelector } from "../../../selectors";
+import { addProduct } from "../../../redux/actions/actions-production";
+import { addNewProductInWarehouse } from "../../../redux/actions/actions-warehouses";
 import CloseIconComponent from "../../Shared/closeIconComponent/CloseIconComponent";
-import {addProduct} from "../../../redux/actions/actions-production";
-
-import './Add-window.scss'
 import AddIconComponent from "../../Shared/addIconComponent/AddIconComponent";
-import {addProductInWarehouse} from "../../../redux/actions/actions-warehouses";
+
+import './Add-window.scss';
 
 
-const AddWindow = ({onClose}) => {
+const AddWindow = ({onClose, setIsHiddenAddWin}) => {
   const [product, setProduct] = useState({
     item: '',
     inWarehouse: 0,
     unallocated: 0,
   })
-  console.log('@@@ product ->', product)
 
-  const [forWarehouse, setForWarehouse] = useState([
-    {
-      id: 0,
-      warehouseName: '',
-      product: product.item,
-      amount: 0
-    }
-  ])
+  const [forWarehouse, setForWarehouse] = useState([])
   useEffect(() => {
-    setForWarehouse(forWarehouse.map(form => (
-      {...form, product: product.item})
-    ))
-
+    if(forWarehouse.length > 0) {
+      setForWarehouse(forWarehouse.map(form => (
+        {...form, product: product.item})
+      ))
+    }
   }, [product.item])
-  console.log('@@@ forWarehouse ->', forWarehouse)
 
   const warehouses = useSelector(warehousesSelector)
   const dispatch = useDispatch()
@@ -48,8 +40,8 @@ const AddWindow = ({onClose}) => {
     setProduct({...product, unallocated: value})
   }
 
-  const handleChangeForWarehouseValue = (e, id, key) => {
-    const value = e.target.value
+  const handleChangeForWarehouseValue = (value, id, key) => {
+
     setForWarehouse(forWarehouse.map(form =>
       form.id === id ? {...form, [key]: value} : form
     ))
@@ -69,8 +61,14 @@ const AddWindow = ({onClose}) => {
 
 
   const onAddProduct = () => {
-    dispatch(addProduct(product))
-    dispatch(addProductInWarehouse(forWarehouse))
+    let amount = 0
+    forWarehouse.forEach((form) => amount = amount + form.amount)
+    const body = {...product, inWarehouse: amount, unallocated: product.unallocated - amount}
+    dispatch(addProduct(body))
+    if (forWarehouse.length > 0) {
+      dispatch(addNewProductInWarehouse(forWarehouse))
+    }
+    setIsHiddenAddWin(false)
   }
 
   return (
@@ -95,7 +93,7 @@ const AddWindow = ({onClose}) => {
           <div className='add-window__container__form__warehouse'>
             {forWarehouse.map(form =>
               <div key={form.id}>
-                <select onChange={(e) => handleChangeForWarehouseValue(e, form.id, 'warehouseName')}>
+                <select onChange={(e) => handleChangeForWarehouseValue(e.target.value, form.id, 'warehouseName')}>
                   <option value=''>Выбрать склад</option>
                   {warehouses.map(warehouse =>
                     <option
@@ -111,7 +109,7 @@ const AddWindow = ({onClose}) => {
                   type="number"
                   min='0'
                   max={product.unallocated}
-                  onChange={(e) => handleChangeForWarehouseValue(e, form.id, 'amount')}
+                  onChange={(e) => handleChangeForWarehouseValue(Number(e.target.value), form.id, 'amount')}
                 />
               </div>
             )}

@@ -46,7 +46,7 @@ const Navbar = () => {
           </div>
         </div>
       </div>
-      {isHiddenAddWin && <AddWindow onClose={toggleAddWin}/>}
+      {isHiddenAddWin && <AddWindow onClose={toggleAddWin} setIsHiddenAddWin={setIsHiddenAddWin}/>}
     </div>
   )
 }
