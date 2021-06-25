@@ -9,6 +9,7 @@ import {useDispatch} from "react-redux";
 import './ProductionModal.scss'
 import AddIconComponent from "../../Shared/addIconComponent/AddIconComponent";
 import {addProductInWarehouse} from "../../../redux/actions/actions-warehouses";
+import ButtonComponent from "../../Shared/Button/ButtonComponent";
 
 
 const ProductModal = ({product}) => {
@@ -20,8 +21,9 @@ const ProductModal = ({product}) => {
   const [forWarehouse, setForWarehouse] = useState([
     {
       id: 0,
+      _id: product._id,
       warehouseName: '',
-      product: editProduct.item,
+      productName: editProduct.item,
       amount: 0
     },
   ])
@@ -90,6 +92,35 @@ const ProductModal = ({product}) => {
         >
           <div className='production-modal__form-area__form__title'>
             <h5>
+              Добавить
+            </h5>
+            <AddIconComponent onAdd={onAddWarehouse}/>
+          </div>
+          <div className='production-modal__form-area__form__distribution'>
+            {forWarehouse.map( (form) =>
+              <div key={form.id}>
+                <input
+                  value={form.warehouseName}
+                  type='text'
+                  onChange={(e) => (e)}
+                />
+                <input
+                  value={form.amount}
+                  type='number'
+                  min='0'
+                  max={editProduct.unallocated}
+                  onChange={(e) => (e)}
+                />
+              </div>
+            )}
+          </div>
+        </Form>
+        <Form
+          className='production-modal__form-area__form'
+          autoComplete='off'
+        >
+          <div className='production-modal__form-area__form__title'>
+            <h5>
               Распределить
             </h5>
             <AddIconComponent onAdd={onAddWarehouse}/>
@@ -114,12 +145,7 @@ const ProductModal = ({product}) => {
           </div>
         </Form>
       </div>
-      <div
-        onClick={onSave}
-        className='production-modal__btn'
-      >
-        <span>Сохранить</span>
-      </div>
+      <ButtonComponent onClick={onSave} text='Сохранить'/>
     </div>
   )
 }

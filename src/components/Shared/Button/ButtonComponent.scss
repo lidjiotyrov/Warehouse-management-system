@@ -1,0 +1,12 @@
+.add-btn {
+  display: flex;
+  justify-content: flex-end;
+
+  span {
+    cursor: pointer;
+    background-color: rgba(3, 50, 148, 0.5);
+    margin: 5px;
+    padding: 5px;
+    border-radius: 10px;
+  }
+}

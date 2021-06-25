@@ -9,9 +9,9 @@ const initState = {
       type: 'Средний',
       status: 'Не заполнен',
       production: [
-        {id: 1, item: 'Картофель', amount: 22},
-        {id: 2, item: 'Хлеб', amount: 23},
-        {id: 3, item: 'Молоко', amount: 32},
+        {_id: 'Картофель', id: 1, productName: 'Картофель', amount: 22},
+        {_id: 'Хлеб', id: 2, productName: 'Хлеб', amount: 23},
+        {_id: 'Молоко', id: 3, productName: 'Молоко', amount: 32},
       ],
     },
     {
@@ -21,9 +21,9 @@ const initState = {
       type: 'Средний',
       status: 'Не заполнен',
       production: [
-        {id: 1, item: 'Картофель', amount: 22},
-        {id: 2, item: 'Хлеб', amount: 23},
-        {id: 3, item: 'Молоко', amount: 32},
+        {_id: 'Картофель', id: 1, productName: 'Картофель', amount: 22},
+        {_id: 'Хлеб', id: 2, productName: 'Хлеб', amount: 23},
+        {_id: 'Молоко', id: 3, productName: 'Молоко', amount: 32},
       ],
     },
     {
@@ -33,9 +33,9 @@ const initState = {
       type: 'Крупный',
       status: 'Заполнен',
       production: [
-        {id: 1, item: 'Картофель', amount: 22},
-        {id: 2, item: 'Хлеб', amount: 23},
-        {id: 3, item: 'Молоко', amount: 32},
+        {_id: 'Картофель', id: 1, productName: 'Картофель', amount: 22},
+        {_id: 'Хлеб', id: 2, productName: 'Хлеб', amount: 23},
+        {_id: 'Молоко', id: 3, productName: 'Молоко', amount: 32},
       ],
     }
   ]
@@ -45,11 +45,12 @@ const warehousesReducer = (state = initState, action) => {
   switch (action.type) {
     case ADD_PRODUCT_IN_WAREHOUSE:
       const production = action.production
+      console.log('@@@ production ->', production)
       return {
         ...state,
         warehouses: state.warehouses.map(warehouse => production.find(item => item.warehouseName === warehouse.item) ? {
           ...warehouse,
-          production: warehouse.production.map(product => product.item === production.find(item => item.warehouseName === warehouse.item).product ? {
+          production: warehouse.production.map(product => product._id === production.find(item => item.warehouseName === warehouse.item)._id ? {
             ...product,
             id: warehouse.production.length + 1,
             amount: product.amount + production.find(item => item.warehouseName === warehouse.item).amount
@@ -67,12 +68,13 @@ const warehousesReducer = (state = initState, action) => {
             ...warehouse.production,
             {
              id: warehouse.production.length + 1,
-             item: newProduction.find(item => item.warehouseName === warehouse.item).product,
+             productName: newProduction.find(item => item.warehouseName === warehouse.item).product,
              amount:  newProduction.find(item => item.warehouseName === warehouse.item).amount
             }
           ]
         } : warehouse)
       }
+
     default:
       return state
   }

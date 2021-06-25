@@ -8,6 +8,7 @@ import CloseIconComponent from "../../Shared/closeIconComponent/CloseIconCompone
 import AddIconComponent from "../../Shared/addIconComponent/AddIconComponent";
 
 import './Add-window.scss';
+import ButtonComponent from "../../Shared/Button/ButtonComponent";
 
 
 const AddWindow = ({onClose, setIsHiddenAddWin}) => {
@@ -114,11 +115,7 @@ const AddWindow = ({onClose, setIsHiddenAddWin}) => {
               </div>
             )}
           </div>
-          <div className='add-window__container__form__add-btn'>
-            <span onClick={() => onAddProduct()}>
-              Добавить
-            </span>
-          </div>
+          <ButtonComponent onClick={onAddProduct} text='Добавить'/>
         </div>
         <CloseIconComponent onClose={onClose}/>
       </div>

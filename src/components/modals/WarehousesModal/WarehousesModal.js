@@ -22,8 +22,8 @@ const WarehouseModal = ({warehouse}) => {
           <div className="warehouses-modal__row">
             {warehouse.item}
             {warehouse.production.map(product =>
-              <div>
-                <div>Наименование {product.item}</div>
+              <div key={product.id}>
+                <div>Наименование {product.productName}</div>
                 <div>Количество {product.amount}</div>
               </div>
             )}
