@@ -13,54 +13,8 @@
 
   &__container {
     display: flex;
+    justify-content: space-between;
     width: 100%;
     margin: 10px;
-
-    &__form {
-      width: 100%;
-
-      &__input {
-        width: 80%;
-        background-color: #c4cee650;
-        border-radius: 10px;
-        border: none;
-        outline: none;
-        padding-left: 10px;
-      }
-
-      &__warehouse {
-
-        select {
-          margin-bottom: 6px;
-          border: none;
-          outline: none;
-          background-color: #c4cee650;
-          border-radius: 10px;
-        }
-
-        &__input {
-          appearance: unset;
-          width: 40px;
-          padding-left: 5px;
-          border: none;
-          outline: none;
-          border-radius: 10px;
-          background-color: #c4cee650
-        }
-      }
-
-      &__add-btn {
-        display: flex;
-        justify-content: flex-end;
-
-        span {
-          cursor: pointer;
-          background-color: rgba(3, 50, 148, 0.5);
-          margin: 5px;
-          padding: 0 5px;
-          border-radius: 10px;
-        }
-      }
-    }
   }
 }

@@ -15,11 +15,13 @@ const items = [
 const Navbar = () => {
   const history = useHistory()
   const [isHiddenAddWin, setIsHiddenAddWin] = useState(false)
+  const [type, setType] = useState('')
 
   const openPage = (page) => history.push(`/${page}`)
 
-  const toggleAddWin = () => {
+  const toggleAddWin = (type) => {
     setIsHiddenAddWin(!isHiddenAddWin)
+    setType(type)
   }
 
   return (
@@ -36,17 +38,17 @@ const Navbar = () => {
           </div>
         )}
         <div className='navbar__container__content'>
-          <div className='navbar__container__content__item' onClick={toggleAddWin}>
+          <div className='navbar__container__content__item' onClick={() => toggleAddWin('production')}>
             Добавить товар
           </div>
         </div>
         <div className='navbar__container__content'>
-          <div className='navbar__container__content__item' onClick={toggleAddWin}>
+          <div className='navbar__container__content__item' onClick={() => toggleAddWin('warehouses')}>
             Добавить склад
           </div>
         </div>
       </div>
-      {isHiddenAddWin && <AddWindow onClose={toggleAddWin} setIsHiddenAddWin={setIsHiddenAddWin}/>}
+      {isHiddenAddWin && <AddWindow onClose={toggleAddWin} setIsHiddenAddWin={setIsHiddenAddWin} type={type}/>}
     </div>
   )
 }

@@ -10,10 +10,12 @@ import './ProductionModal.scss'
 import AddIconComponent from "../../Shared/addIconComponent/AddIconComponent";
 import {addProductInWarehouse} from "../../../redux/actions/actions-warehouses";
 import ButtonComponent from "../../Shared/Button/ButtonComponent";
+import {warehousesSelector} from "../../../selectors";
 
 
 const ProductModal = ({product}) => {
   const dispatch = useDispatch()
+  
   const [editProduct, setEditProduct] = useState({
     ...product
   })
@@ -21,24 +23,23 @@ const ProductModal = ({product}) => {
   const [forWarehouse, setForWarehouse] = useState([
     {
       id: 0,
-      _id: product._id,
       warehouseName: '',
-      productName: editProduct.item,
+      productName: product.item,
       amount: 0
     },
   ])
   console.log('@@@ forWarehouse ->', forWarehouse)
 
-  const onChangeNameProduct = (e) => {
-    const value = e.target.value
-    setEditProduct({...editProduct, item: value})
+  const onChangeAmountProduct = (e) => {
+    const value = Number(e.target.value)
+    setEditProduct({...editProduct, unallocated: value})
   }
 
   const onAddWarehouse = () => {
     setForWarehouse([...forWarehouse, {
       id: forWarehouse.length,
       warehouseName: '',
-      product: editProduct.item,
+      productName: product.item,
       amount: 0
     }])
   }
@@ -54,7 +55,7 @@ const ProductModal = ({product}) => {
   }
 
   const onSave = () => {
-    dispatch(addProductInWarehouse(forWarehouse))
+    forWarehouse.map(product => dispatch(addProductInWarehouse(product)))
   }
 
   return (
@@ -69,19 +70,15 @@ const ProductModal = ({product}) => {
           </h5>
           <div className="production-modal__row">
             <div>
-              <FormLabel>Наименование:</FormLabel>
-              <FormControl
-                type='text'
-                value={product.item}
-                onChange={(e) => onChangeNameProduct(e)}
-              />
+              <FormLabel>Наименование: </FormLabel>
+              {product.item}
             </div>
             <div>
-              <FormLabel>На складах:</FormLabel>
+              <FormLabel>На складах: </FormLabel>
               {product.inWarehouse}
             </div>
             <div>
-              <FormLabel>Не распределенно:</FormLabel>
+              <FormLabel>Не распределенно: </FormLabel>
               {product.unallocated}
             </div>
           </div>
@@ -94,25 +91,9 @@ const ProductModal = ({product}) => {
             <h5>
               Добавить
             </h5>
-            <AddIconComponent onAdd={onAddWarehouse}/>
           </div>
           <div className='production-modal__form-area__form__distribution'>
-            {forWarehouse.map( (form) =>
-              <div key={form.id}>
-                <input
-                  value={form.warehouseName}
-                  type='text'
-                  onChange={(e) => (e)}
-                />
-                <input
-                  value={form.amount}
-                  type='number'
-                  min='0'
-                  max={editProduct.unallocated}
-                  onChange={(e) => (e)}
-                />
-              </div>
-            )}
+            <input type="text" onChange={(e) => onChangeAmountProduct(e)}/>
           </div>
         </Form>
         <Form
@@ -120,10 +101,10 @@ const ProductModal = ({product}) => {
           autoComplete='off'
         >
           <div className='production-modal__form-area__form__title'>
+            <AddIconComponent onAdd={onAddWarehouse}/>
             <h5>
               Распределить
             </h5>
-            <AddIconComponent onAdd={onAddWarehouse}/>
           </div>
           <div className='production-modal__form-area__form__distribution'>
             {forWarehouse.map( (form) =>
