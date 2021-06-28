@@ -20,35 +20,37 @@
   border-radius: 10px;
   box-shadow: 0 4px 4px rgba(0, 0, 0, 0.25);
   box-sizing: border-box;
-  width: 80%;
-  max-height: 90%;
+  max-width: 600px;
+  width: 100%;
 
   &__header {
     background: #F6F6FA;
     box-sizing: border-box;
-    height: 7rem;
-    padding: 32px 110px 16px 110px;
 
-    &__label {
-      color: black;
-      font-family: font_label, sans-serif;
-      font-size: 0.8rem;
-      line-height: 1rem;
-    }
+    &__container {
+      padding: 10px;
 
-    &__title {
-      margin-top: 8px;
-      color: black;
-      font-family: font_primary, sans-serif;
-      font-size: 1.7rem;
-      line-height: 2rem;
+      &__label {
+        color: black;
+        font-family: font_label, sans-serif;
+        font-size: 0.8rem;
+        line-height: 1rem;
+      }
+
+      &__title {
+        margin-top: 8px;
+        color: black;
+        font-family: font_primary, sans-serif;
+        font-size: 1.7rem;
+        line-height: 2rem;
+      }
     }
   }
 
+
   &__body {
-    padding: 0 50px 56px 50px;
-    max-height: 70vh;
-    overflow-y: visible;
+    max-height: 300px;
+    height: 100%;
   }
 
   &__close-button {
@@ -58,6 +60,7 @@
     width: 32px;
     height: 32px;
     border-radius: 50%;
+
     span {
       cursor: pointer;
     }

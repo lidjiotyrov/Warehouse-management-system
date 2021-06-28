@@ -75,14 +75,11 @@ const ProductionForm = ({setIsHiddenAddWin}) => {
     <input
       className='form__input'
       onChange={(e) => handleChangeNameValue(e)}
-      type='text'
     />
     <h6>Количество:</h6>
     <input
       className='form__input'
       onChange={(e) => handleChangeAmountValue(e)}
-      type='number'
-      min='0'
     />
     <h6>На склад:</h6>
     <AddIconComponent onAdd={onAddInputForWarehouse}/>
@@ -102,9 +99,6 @@ const ProductionForm = ({setIsHiddenAddWin}) => {
           </select>
           <input
             className='form__warehouse__input'
-            type="number"
-            min='0'
-            max={product.unallocated}
             onChange={(e) => handleChangeForWarehouseValue(Number(e.target.value), form.id, 'amount')}
           />
         </div>

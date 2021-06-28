@@ -9,7 +9,6 @@ import './Navbar.scss'
 const items = [
   { name: 'Складские помещения', value: 'warehouses' },
   { name: 'Товары', value: 'production' },
-  { name: 'Нераспределенные товары', value: 'unallocated' },
 ]
 
 const Navbar = () => {

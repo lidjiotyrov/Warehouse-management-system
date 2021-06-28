@@ -48,11 +48,14 @@ const RootModal = (props) => {
     <div className='modal-wrapper'>
       <div className="modal">
         <div className="modal__header">
-          <h4 className="modal__header__label">{modalState.modalProps.label}</h4>
-          <h2 className="modal__header__title">{modalState.modalProps.title}</h2>
-          <div className="modal__close-button">
-            <CloseIconComponent onClose={onHideModal}/>
+          <div className='modal__header__container'>
+            <h4 className="modal__header__container__label">{modalState.modalProps.label}</h4>
+            <h2 className="modal__header__container__title">{modalState.modalProps.title}</h2>
+            <div className="modal__close-button">
+              <CloseIconComponent onClose={onHideModal}/>
+            </div>
           </div>
+
         </div>
         <div className="modal__body">
           <SpecificModal product={modalState.modalProps.product} warehouse={modalState.modalProps.warehouse}/>

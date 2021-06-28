@@ -1,25 +1,23 @@
 import React, {useState} from "react";
 import {
   Form,
-  FormControl,
   FormLabel,
 } from "react-bootstrap";
 import {useDispatch} from "react-redux";
 
-import './ProductionModal.scss'
 import AddIconComponent from "../../Shared/addIconComponent/AddIconComponent";
 import {addProductInWarehouse} from "../../../redux/actions/actions-warehouses";
 import ButtonComponent from "../../Shared/Button/ButtonComponent";
-import {warehousesSelector} from "../../../selectors";
+
+import './ProductionModal.scss'
 
 
 const ProductModal = ({product}) => {
   const dispatch = useDispatch()
-  
+
   const [editProduct, setEditProduct] = useState({
     ...product
   })
-  console.log('@@@ editProduct ->', editProduct)
   const [forWarehouse, setForWarehouse] = useState([
     {
       id: 0,
@@ -28,7 +26,6 @@ const ProductModal = ({product}) => {
       amount: 0
     },
   ])
-  console.log('@@@ forWarehouse ->', forWarehouse)
 
   const onChangeAmountProduct = (e) => {
     const value = Number(e.target.value)
@@ -60,9 +57,10 @@ const ProductModal = ({product}) => {
 
   return (
     <div className='production-modal'>
-      <div className="production-modal__form-area">
+      <div className="production-modal__wrapper">
+
         <Form
-          className='production-modal__form-area__form'
+          className='production-modal__wrapper__form'
           autoComplete="off"
         >
           <h5>
@@ -83,50 +81,55 @@ const ProductModal = ({product}) => {
             </div>
           </div>
         </Form>
+
         <Form
-          className='production-modal__form-area__form'
+          className='production-modal__wrapper__form'
           autoComplete='off'
         >
-          <div className='production-modal__form-area__form__title'>
+          <div className='production-modal__wrapper__form__title'>
             <h5>
-              Добавить
+              Добавить:
             </h5>
           </div>
-          <div className='production-modal__form-area__form__distribution'>
+          <div className='production-modal__wrapper__form__addition'>
             <input type="text" onChange={(e) => onChangeAmountProduct(e)}/>
           </div>
         </Form>
+
         <Form
-          className='production-modal__form-area__form'
+          className='production-modal__wrapper__form form__distribution'
           autoComplete='off'
         >
-          <div className='production-modal__form-area__form__title'>
+          <div className='production-modal__wrapper__form__title'>
             <AddIconComponent onAdd={onAddWarehouse}/>
             <h5>
               Распределить
             </h5>
           </div>
-          <div className='production-modal__form-area__form__distribution'>
-            {forWarehouse.map( (form) =>
-              <div key={form.id}>
-                <input
-                  value={form.warehouseName}
-                  type='text'
-                  onChange={(e) => onChangeWarehouseName(e, form.id)}
-                />
-                <input
-                  value={form.amount}
-                  type='number'
-                  min='0'
-                  max={editProduct.unallocated}
-                  onChange={(e) => onAmount(e, form.id)}
-                />
-              </div>
-            )}
+          <div className='production-modal__wrapper__form__distribution'>
+            <div className='production-modal__wrapper__form__distribution__container'>
+              {forWarehouse.map((form) =>
+                <div key={form.id} >
+                  <input
+                    className='production-modal__wrapper__form__distribution__container__input'
+                    value={form.warehouseName}
+                    type='text'
+                    onChange={(e) => onChangeWarehouseName(e, form.id)}
+                  />
+                  <input
+                    className='production-modal__wrapper__form__distribution__container__input-amount'
+                    value={form.amount}
+                    onChange={(e) => onAmount(e, form.id)}
+                  />
+                </div>
+              )}
+            </div>
+
           </div>
+          <ButtonComponent onClick={onSave} text='Распределить'/>
         </Form>
+
       </div>
-      <ButtonComponent onClick={onSave} text='Сохранить'/>
     </div>
   )
 }

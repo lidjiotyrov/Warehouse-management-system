@@ -4,6 +4,8 @@ import {
 } from "react-bootstrap";
 import { useDispatch } from "react-redux";
 
+import './WarehousesModal.scss'
+
 
 
 const WarehouseModal = ({warehouse}) => {
