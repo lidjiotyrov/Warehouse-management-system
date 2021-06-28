@@ -1,4 +1,4 @@
-import {ADD_NEW_PRODUCT_IN_WAREHOUSE, ADD_PRODUCT_IN_WAREHOUSE} from "../../constans/constans";
+import {ADD_NEW_PRODUCT_IN_WAREHOUSE, ADD_PRODUCT_IN_WAREHOUSE, ADD_WAREHOUSE} from "../../constans/constans";
 
 const initState = {
   warehouses: [
@@ -76,31 +76,22 @@ const warehousesReducer = (state = initState, action) => {
         }
       }
 
-    case ADD_NEW_PRODUCT_IN_WAREHOUSE:
-      const newProduction = action.production
+    case ADD_WAREHOUSE:
+      const id = state.warehouses.length + 1
+      const newWarehouse = action.warehouse
       return {
         ...state,
-        warehouses: state.warehouses.map(warehouse => newProduction.find(item => item.warehouseName === warehouse.item) ? {
-          ...warehouse,
-          production: [
-            ...warehouse.production,
-            {
-              id: warehouse.production.length + 1,
-              productName: newProduction.find(item => item.warehouseName === warehouse.item).product,
-              amount: newProduction.find(item => item.warehouseName === warehouse.item).amount
-            }
-          ]
-        } : warehouse)
-      }
-
-    case 'ADD_NEW_PROD':
-      const a = state.warehouses.find(ware => ware.production === action.warehouseName).production.find(prod => prod.name === action.product)
-      if (a) {
-        return {
-          ...state
-        }
-      } else {
-
+        warehouses: [
+          ...state.warehouses,
+          {
+           id: id,
+            item: newWarehouse.item,
+            address: newWarehouse.address,
+            type: newWarehouse.type,
+            status: newWarehouse.status,
+            production: []
+          }
+        ]
       }
 
     default:

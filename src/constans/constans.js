@@ -3,16 +3,15 @@ export const SHOW_MODAL = 'SHOW_MODAL'
 export const HIDE_MODAL = 'HIDE_MODAL'
 
 // Redux production reducer
-
 export const ADD_PRODUCT = 'ADD_PRODUCT'
 export const DELETE_PRODUCT = 'DELETE_PRODUCT'
 export const EDIT_PRODUCT = 'EDIT_PRODUCT'
 
 //Redux warehouses reducer
-
 export const ADD_PRODUCT_IN_WAREHOUSE = 'ADD_PRODUCT_IN_WAREHOUSE'
 export const ADD_NEW_PRODUCT_IN_WAREHOUSE = 'ADD_NEW_PRODUCT_IN_WAREHOUSE'
-export const CHANGE_NAME_PRODUCT = 'CHANGE_NAME_PRODUCT'
+export const ADD_WAREHOUSE = 'ADD_WAREHOUSE'
+
 //Modal types
 export const MODALS_TYPES = {
   VIEW_WAREHOUSE: 'VIEW_WAREHOUSE',
