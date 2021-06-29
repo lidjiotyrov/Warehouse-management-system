@@ -1,4 +1,9 @@
-import {ADD_NEW_PRODUCT_IN_WAREHOUSE, ADD_PRODUCT_IN_WAREHOUSE, ADD_WAREHOUSE} from "../../constans/constans";
+import {
+  ADD_NEW_PRODUCT_IN_WAREHOUSE,
+  ADD_PRODUCT_IN_WAREHOUSE,
+  ADD_WAREHOUSE,
+  DELETE_PRODUCT_IN_WAREHOUSE, MOVE_PRODUCT
+} from "../../constans/constans";
 
 const initState = {
   warehouses: [
@@ -46,7 +51,8 @@ const warehousesReducer = (state = initState, action) => {
     case ADD_PRODUCT_IN_WAREHOUSE:
       const product = action.product
       const checkProductInWarehouse = state.warehouses.find(warehouse => warehouse.item === product.warehouseName)
-        .production.find(prod => prod.productName === product.productName)
+        ?.production.find(prod => prod.productName === product.productName)
+      console.log('@@@ checkProductInWarehouse ->', checkProductInWarehouse)
       if (checkProductInWarehouse) {
         return {
           ...state,
@@ -92,6 +98,23 @@ const warehousesReducer = (state = initState, action) => {
             production: []
           }
         ]
+      }
+
+    case DELETE_PRODUCT_IN_WAREHOUSE:
+      const productName = action.productName
+      return {
+        ...state,
+        warehouses: state.warehouses.map(warehouse =>
+          ({
+            ...warehouse,
+            production: warehouse.production.filter(prod => prod.productName !== productName)
+          })
+        )
+      }
+
+    case MOVE_PRODUCT:
+      return {
+
       }
 
     default:

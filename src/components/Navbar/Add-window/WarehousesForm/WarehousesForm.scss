@@ -1,11 +1,11 @@
 .form {
 
   &__input {
-    width: 80%;
     background-color: #c4cee650;
-    border-radius: 10px;
-    border: none;
+    border-radius: 5px;
+    border: 1px solid #4987b450;
     outline: none;
     padding-left: 10px;
+    margin-top: 4px;
   }
 }

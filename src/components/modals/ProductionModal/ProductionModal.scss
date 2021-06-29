@@ -5,8 +5,36 @@
   height: 100%;
 
   &__wrapper {
-    display: flex;
+    display: grid;
+    grid-template-areas:
+    "info-form add-form delete-form"
+    "distribution-form distribution-form delete-btn"
+  ;
     margin-top: 1.1rem;
+
+    #info-form {
+      grid-area: info-form;
+    }
+
+    #add-form {
+      grid-area: add-form;
+    }
+
+    #distribution-form {
+      grid-area: distribution-form;
+    }
+
+    #delete-form {
+      grid-area: delete-form;
+    }
+
+    #delete-btn {
+      grid-area: delete-btn;
+      display: flex;
+      justify-content: flex-end;
+      flex-direction: column;
+      align-items: flex-end;
+    }
 
     &__form {
       width: 100%;
@@ -21,10 +49,23 @@
 
       &__title {
         display: flex;
+        margin-bottom: 5px;
+      }
+
+      &__addition {
+        margin: 10px 10px 24px 0;
+
+        &__input {
+          background-color: #F6F6FA;;
+          border-radius: 5px;
+          border: 1px solid #4987b450;
+          outline: none;
+          padding-left: 10px;
+        }
       }
 
       &__distribution {
-        background-color: #c2cadc50;
+        background-color: #F6F6FA;;
         overflow: auto;
         height: 45px;
         border: 1px solid #4987b450;
@@ -52,21 +93,27 @@
           flex-direction: column;
           align-items: center;
 
+          &__inputs {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+          }
+
           &__input {
             width: 50%;
             background-color: #c4cee650;
             border-radius: 5px;
-            border: none;
+            border: 1px solid #4987b450;
             outline: none;
             padding-left: 10px;
-            margin-right: 5px;
+            margin: 3px 10px 3px 0;
           }
 
           &__input-amount {
             width: 30px;
             background-color: #c4cee650;
             border-radius: 5px;
-            border: none;
+            border: 1px solid #4987b450;
             outline: none;
             padding-left: 10px;
           }
@@ -79,9 +126,8 @@
       display: flex;
       flex-wrap: wrap;
       width: 100%;
-      font-family: font_secondary, sans-serif;
+      font-family: sans-serif;
       font-size: 1rem;
-      color: var(--c-text);
     }
   }
 
@@ -100,6 +146,30 @@
 
 .form__distribution {
 
+}
+
+@media (max-width: 640px) {
+  .production-modal {
+    overflow: auto;
+  }
+  .production-modal__wrapper {
+    display: flex;
+    flex-direction: column;
+
+    &__form{
+      align-items: center;
+      margin-top: 5px;
+
+      &__addition {
+        margin: 10px 10px 5px 0;
+      }
+    }
+  }
+
+  #delete-btn {
+    align-items: center!important;
+    margin-top: 10px;
+  }
 }
 
 
