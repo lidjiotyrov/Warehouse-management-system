@@ -1,4 +1,4 @@
-import React from 'react'
+import React, {useEffect} from 'react'
 import {useDispatch, useSelector} from "react-redux";
 
 import {productionSelector} from "../../selectors";
@@ -17,6 +17,10 @@ const columns = [
 const Production = () => {
   const production = useSelector(productionSelector)
   const dispatch = useDispatch()
+
+  useEffect(() =>{
+
+  }, [production])
 
   const onShowProductionModal = (product) => {
     dispatch(showProductionModal(product))

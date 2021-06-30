@@ -1,9 +1,9 @@
 import {HIDE_MODAL, MODALS_TYPES, SHOW_MODAL} from "../../constans/constans"
 
+
 export const hideModals = () => {
   return {type: HIDE_MODAL}
 }
-
 
 const showModal = (modalType, modalProps) => {
   return {

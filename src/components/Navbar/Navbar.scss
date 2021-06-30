@@ -26,3 +26,22 @@
     }
   }
 }
+
+@media (max-width: 400px) {
+  .navbar__container__content__item {
+    font-size: 10px;
+  }
+
+  .production__columns {
+    padding: 8px 0;
+  }
+
+  .production__columns__column {
+    text-align: center;
+    width: 25%;
+    font-size: 8px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+}

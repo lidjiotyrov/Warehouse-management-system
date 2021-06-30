@@ -2,9 +2,9 @@ import React from "react";
 
 import CloseIconComponent from "../../Shared/closeIconComponent/CloseIconComponent";
 import ProductionForm from "./ProductionForm/ProductionForm";
+import WarehousesForm from "./WarehousesForm/WarehousesForm";
 
 import './Add-window.scss';
-import WarehousesForm from "./WarehousesForm/WarehousesForm";
 
 
 const AddWindow = ({onClose, setIsHiddenAddWin, type}) => {

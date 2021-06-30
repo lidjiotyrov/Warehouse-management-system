@@ -26,3 +26,9 @@
 .backgroundColor {
   background-color: #c2cadc;
 }
+
+@media (max-width: 400px) {
+  .production__product {
+    font-size: 10px;
+  }
+}

@@ -1,4 +1,3 @@
-
 import React from "react";
 import {ReactComponent as AddIcon} from "../../../static/images/icons/addIcon.svg";
 

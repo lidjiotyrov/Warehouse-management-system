@@ -1,12 +1,15 @@
 import React, {useEffect, useState} from 'react'
+import {useDispatch, useSelector} from "react-redux";
+import {toast} from 'react-toastify';
+
 import AddIconComponent from "../../../Shared/addIconComponent/AddIconComponent";
 import ButtonComponent from "../../../Shared/Button/ButtonComponent";
-import {useDispatch, useSelector} from "react-redux";
 import {warehousesSelector} from "../../../../selectors";
 import {addProduct} from "../../../../redux/actions/actions-production";
 import {addProductInWarehouse} from "../../../../redux/actions/actions-warehouses";
 
 import './ProductionForm.scss'
+
 
 const ProductionForm = ({setIsHiddenAddWin}) => {
   const [product, setProduct] = useState({
@@ -22,6 +25,7 @@ const ProductionForm = ({setIsHiddenAddWin}) => {
         {...form, product: product.item})
       ))
     }
+    // eslint-disable-next-line
   }, [product.item])
 
   const warehouses = useSelector(warehousesSelector)
@@ -60,30 +64,36 @@ const ProductionForm = ({setIsHiddenAddWin}) => {
 
   const onAddProduct = () => {
     let amount = 0
-    forWarehouse.forEach((form) => amount = amount + form.amount)
-    const body = {...product, inWarehouse: amount, unallocated: product.unallocated - amount}
-    dispatch(addProduct(body))
-    if (forWarehouse.length > 0) {
-      forWarehouse.map(product => dispatch(addProductInWarehouse(product)))
+      forWarehouse.forEach((form) => amount = amount + form.amount)
+    if (product.item && product.unallocated > 0) {
+      const body = {...product, inWarehouse: amount, unallocated: product.unallocated - amount}
+      dispatch(addProduct(body))
+      if (forWarehouse.length > 0) {
+        forWarehouse.map(product => dispatch(addProductInWarehouse(product)))
+      }
+      toast.success('Товар добавлен')
+      setIsHiddenAddWin(false)
+    } else {
+      toast.error('Заполните поля')
     }
-    setIsHiddenAddWin(false)
+
   }
 
  return (
-  <div className='form'>
-    <h6 className='form__title'>Название:</h6>
+  <div className='form-prod'>
+    <h6 className='form-prod__title'>Название:</h6>
     <input
-      className='form__input'
+      className='form-prod__input'
       onChange={(e) => handleChangeNameValue(e)}
     />
     <h6>Количество:</h6>
     <input
-      className='form__input'
+      className='form-prod__input'
       onChange={(e) => handleChangeAmountValue(e)}
     />
     <h6>На склад:</h6>
     <AddIconComponent onAdd={onAddInputForWarehouse}/>
-    <div className='form__warehouse'>
+    <div className='form-prod__warehouse'>
       {forWarehouse.map(form =>
         <div key={form.id}>
           <select onChange={(e) => handleChangeForWarehouseValue(e.target.value, form.id, 'warehouseName')}>
@@ -98,7 +108,7 @@ const ProductionForm = ({setIsHiddenAddWin}) => {
             )}
           </select>
           <input
-            className='form__warehouse__input'
+            className='form-prod__warehouse__input'
             onChange={(e) => handleChangeForWarehouseValue(Number(e.target.value), form.id, 'amount')}
           />
         </div>

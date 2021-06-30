@@ -1,4 +1,4 @@
-.form {
+.form-prod {
   width: 100%;
   height: 100%;
 
@@ -49,20 +49,6 @@
       outline: none;
       border-radius: 10px;
       background-color: #c4cee650
-    }
-  }
-
-  &__add-btn {
-    display: flex;
-    justify-content: flex-end;
-    margin-top: 10px;
-
-    span {
-      cursor: pointer;
-      background-color: rgba(3, 50, 148, 0.5);
-      margin: 5px;
-      padding: 0 5px;
-      border-radius: 10px;
     }
   }
 }

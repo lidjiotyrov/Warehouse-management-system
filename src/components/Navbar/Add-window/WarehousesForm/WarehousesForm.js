@@ -1,4 +1,5 @@
 import React, {useState} from 'react'
+import {toast} from 'react-toastify';
 
 import ButtonComponent from "../../../Shared/Button/ButtonComponent";
 import {useDispatch} from "react-redux";
@@ -20,30 +21,35 @@ const WarehousesForm = ({setIsHiddenAddWin}) => {
  }
  
  const onAddWarehouse = () => {
-   dispatch(addWarehouse(warehouse))
-   setIsHiddenAddWin(false)
+   if(warehouse.item) {
+     dispatch(addWarehouse(warehouse))
+     toast.success('Склад добавлен')
+     setIsHiddenAddWin(false)
+   } else {
+     toast.error('Заполните поля')
+   }
  }
 
  return (
-  <div className='form'>
+  <div className='form-ware'>
    <h6>Наименование:</h6>
    <input
-     className='form__input'
+     className='form-ware__input'
      onChange={(e) => onChange('item', e)}
    />
    <h6>Адрес:</h6>
    <input
-     className='form__input'
+     className='form-ware__input'
      onChange={(e) => onChange('address', e)}
    />
    <h6>Тип:</h6>
    <input
-     className='form__input'
+     className='form-ware__input'
      onChange={(e) => onChange('type', e)}
    />
    <h6>Статус:</h6>
    <input
-     className='form__input'
+     className='form-ware__input'
      onChange={(e) => onChange('status', e)}
    />
     <ButtonComponent onClick={onAddWarehouse} text='Добавить'/>

@@ -4,6 +4,7 @@ import {
   FormLabel,
 } from "react-bootstrap";
 import {useDispatch, useSelector} from "react-redux";
+import {toast} from "react-toastify";
 
 import AddIconComponent from "../../Shared/addIconComponent/AddIconComponent";
 import {addProductInWarehouse, deleteProductInWarehouse} from "../../../redux/actions/actions-warehouses";
@@ -15,20 +16,21 @@ import {hideModals} from "../../../redux/actions/common";
 import './ProductionModal.scss'
 
 
+
 const ProductModal = ({product}) => {
   const dispatch = useDispatch()
   const prod = useSelector(productionSelector).find((prod) => prod.item === product.item)
-  console.log('@@@  ->', prod)
 
   const [editProduct, setEditProduct] = useState({
-    ...prod
+    ...prod,
+    unallocated: 0,
   })
   const [forWarehouse, setForWarehouse] = useState([
     {
       id: 0,
       warehouseName: '',
       productName: prod?.item,
-      amount: 0
+      amount: 0,
     },
   ])
   const [deleteCount, setDeleteCount] = useState(0)
@@ -58,16 +60,28 @@ const ProductModal = ({product}) => {
   }
 
   const onAdd = () => {
-    dispatch(addProduct(editProduct))
+    if (editProduct.unallocated > 0) {
+      dispatch(addProduct(editProduct))
+      toast.success('Товар добавлен')
+    } else {
+      toast.error('Заполните форму правильно')
+    }
   }
 
   const onDelete = () => {
-    dispatch(deleteProduction({ name:prod.item, amount: deleteCount}))
+    if(deleteCount > 0){
+      dispatch(deleteProduction({ name:prod.item, amount: deleteCount}))
+      toast.success('Товар удален')
+    } else {
+      toast.error('Заполните форму правильно')
+    }
+
   }
 
   const onDeleteCompletely = () => {
     dispatch((deleteProductInWarehouse(prod.item)))
     dispatch(deleteProduction(prod.item, 'completely'))
+    toast.success('Товар удален')
     dispatch(hideModals())
   }
 
