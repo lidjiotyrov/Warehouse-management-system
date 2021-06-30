@@ -102,7 +102,7 @@ const WarehouseModal = (props) => {
         warehouseName: warehouse.item
       })))
       deleteProd.map(prod => prod.count > 0 && dispatch(deleteProductInWarehouse(prod)))
-      deleteProd.map(prod => prod.count > 0 && dispatch(addProduct({item: prod.productName, unallocated: prod.count})))
+      deleteProd.map(prod => prod.count > 0 && dispatch(addProduct({item: prod.productName, unallocated: prod.count, move: 'move'})))
       toast.success('Товар удален')
     } else {
       toast.error('Заполните поля')

@@ -16,6 +16,15 @@ const productionReducer = (state = initState, action) => {
 
       if (checkProduct) {
 
+        if(product.move) {
+          return {
+            ...state,
+            production: state.production.map(prod => prod.item === product.item
+              ? {...prod, unallocated: prod.unallocated + product.unallocated, inWarehouse: prod.inWarehouse - product.unallocated}
+              : prod)
+          }
+        }
+
         return {
           ...state,
           production: state.production.map(prod => prod.item === product.item
